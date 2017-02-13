@@ -1,7 +1,7 @@
 {
   "title": "GTK Dark Theme",
   "name": "gtk-dark-theme",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Make the window decorator dark to match Firefox's dark theme. Based on sagebind's Atom addon.",
   "main": "index.js",
   "author": "Eitan Isaacson",

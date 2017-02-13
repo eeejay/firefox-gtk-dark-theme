@@ -1,5 +1,8 @@
 const system = require("sdk/system");
 const child_process = require("sdk/system/child_process");
+const { viewFor } = require("sdk/view/core");
+const { isDocumentLoaded } = require("sdk/window/utils");
+const { browserWindows } = require("sdk/windows");
 
 /* Based on: https://github.com/sagebind/atom-gtk-dark-theme */
 function exec(command, callback) {
@@ -135,5 +138,15 @@ function getWindowProcessId(handle) {
   });
 }
 
-exports.main = () =>  setFirefoxGtkTheme("dark");
-exports.onUnload = () =>  setFirefoxGtkTheme();
+function setDarkTheme() {
+  setFirefoxGtkTheme("dark");
+}
+
+exports.main = () => {
+  setDarkTheme();
+  browserWindows.on("activate", setDarkTheme);
+};
+exports.onUnload = () => {
+  setFirefoxGtkTheme();
+  browserWindows.off("activate", setDarkTheme);
+};
